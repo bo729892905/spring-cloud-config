@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: config-server
+  http:
+      encoding: { charset: UTF-8, enable: true, force: true }
+  cloud:
+    config:
+      server:
+        git:
+          #git地址
+          uri: https://gitee.com/starchi/config-demo.git
+          #git地址查看目录，可配多个
+          search-paths: config-repository
+    stream:
+      #指定用kafka stream来作为默认消息中间件
+      default-binder: kafka
+      kafka:
+        #来自KafkaBinderConfigurationProperties
+        binder:
+          brokers: 39.105.24.60:9092
+          zkNodes: 39.105.24.60:2182,39.105.24.60:3182,39.105.24.60:4182
+          configuration:
+            auto:
+              offset:
+                #可以设置原生kafka属性，比如设置新的消费组从最新的offset开始消费
+                reset: latest
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int(10000,19999)}
+    statusPageUrl: http://${spring.cloud.client.ipAddress}:${server.port}${server.context-path}/swagger
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+# actuator 安全性配置
+security:
+  basic:
+    enabled:  true
+    path: /admin
+  user:
+    name: admin
+    password: admin
