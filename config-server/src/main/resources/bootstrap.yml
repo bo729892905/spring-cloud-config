@@ -17,7 +17,7 @@ spring:
       kafka:
         #来自KafkaBinderConfigurationProperties
         binder:
-          brokers: 39.105.24.60:9092,39.105.24.60:9093
+          brokers: 39.105.24.60:9092
           zkNodes: 39.105.24.60:2181,39.105.24.60:3181,39.105.24.60:4181
           zkConnectionTimeout: 10000
           configuration:
