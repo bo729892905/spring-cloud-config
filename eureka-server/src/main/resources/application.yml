@@ -22,7 +22,3 @@ eureka:
     renewalThresholdUpdateIntervalMs: 60000
     #自我保护，单机测试时容易产生服务无法及时踢出的问题，本地开发时关闭
     enableSelfPreservation: true
-
-logging:
-  level:
-    root: INFO

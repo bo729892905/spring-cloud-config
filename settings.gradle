@@ -1,5 +1,5 @@
 rootProject.name = 'config'
 include 'config-server'
 include 'eureka-server'
-include 'config-repository'
+include 'config-client'
 

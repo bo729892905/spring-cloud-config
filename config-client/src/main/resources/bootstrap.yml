@@ -1,42 +1,37 @@
 spring:
   application:
-    name: config-server
+    name: config-client
   http:
-      encoding: { charset: UTF-8, enable: true, force: true }
+    encoding: { charset: UTF-8, enable: true, force: true }
   cloud:
     config:
-      server:
-        git:
-          #git地址
-          uri: https://github.com/spring-cloud/spring-cloud-config.git
-          #git地址查看目录，可配多个
-          search-paths: config-repository
+      name: application
+      profile: test,${spring.application.name}
+      label: master
+      discovery:
+        enabled: true
+        serviceId: config-server
     stream:
       #指定用kafka stream来作为默认消息中间件
       default-binder: kafka
       kafka:
-        #来自KafkaBinderConfigurationProperties
         binder:
           brokers: 39.105.24.60
           zkNodes: 39.105.24.60
-          zkConnectionTimeout: 30000
           configuration:
             auto:
               offset:
                 #可以设置原生kafka属性，比如设置新的消费组从最新的offset开始消费
                 reset: latest
-
 eureka:
   instance:
-    leaseRenewalIntervalInSeconds: 10
     preferIpAddress: true
-    instanceId: ${spring.application.name}:${random.int(10000,19999)}
-    statusPageUrl: http://${spring.cloud.client.ipAddress}:${server.port}${server.context-path}/swagger
+    leaseRenewalIntervalInSeconds: 10
+    #在注册中心展示名称+ip+随机数
+    instanceId: ${spring.application.name:${random.value}}:${server.port}
+    #在注册中心默认跳转地址，跳到swagger
+    status-page-url:  http://${spring.cloud.client.ipAddress}:${server.port}/swagger-ui.html
   client:
-    registerWithEureka: true
-    fetchRegistry: true
-    healthcheck:
-      enabled: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
