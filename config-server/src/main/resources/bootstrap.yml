@@ -8,7 +8,7 @@ spring:
       server:
         git:
           #git地址
-          uri: https://github.com/spring-cloud/spring-cloud-config.git
+          uri: https://github.com/bo729892905/spring-cloud-config.git
           #git地址查看目录，可配多个
           search-paths: config-repository
     stream:
