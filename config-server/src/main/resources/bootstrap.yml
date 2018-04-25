@@ -40,11 +40,4 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
-# actuator 安全性配置
-security:
-  basic:
-    enabled:  true
-    path: /admin
-  user:
-    name: admin
-    password: admin
+management.security.enabled: false
