@@ -16,8 +16,8 @@ spring:
       default-binder: kafka
       kafka:
         binder:
-          brokers: 39.105.24.60
-          zkNodes: 39.105.24.60
+          brokers: 39.105.24.60:9092,39.105.24.60:9093
+          zkNodes: 39.105.24.60:2181,39.105.24.60:3181,39.105.24.60:4181
           configuration:
             auto:
               offset:
